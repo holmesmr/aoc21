@@ -1,0 +1,16 @@
+[package]
+name = "aoc21"
+version = "0.1.0"
+authors = ["Michael Holmes <michael.holmes@passfort.com>"]
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.51"
+itertools = "0.10.1"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "day01"
+harness = false
