@@ -50,7 +50,7 @@ pub fn solve_part2<R: std::io::BufRead>(input: R) -> anyhow::Result<i32> {
 
 #[cfg(test)]
 mod tests {
-    use crate::day01::*;
+    use super::*;
     use std::io::Cursor;
 
     const SAMPLE_INPUT: &[u8] = b"\

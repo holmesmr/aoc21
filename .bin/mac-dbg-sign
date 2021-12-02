@@ -9,4 +9,4 @@ if ! shift 3 &> /dev/null; then
 	exit 1
 fi
 
-codesign -dvvv --entitlements=- "target/${mode}/day${day}_${part}"
+codesign -s - -v -f --entitlements "misc/macos/debug-entitlements.plist" "target/${mode}/day${day}_${part}"

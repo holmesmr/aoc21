@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-use anyhow::Context;
+use anyhow::{anyhow, Context};
 
 pub fn transform_input_as_value_list<F, R, T>(
     input: R,
@@ -26,6 +26,18 @@ where
 {
     transform_input_as_value_list(input, |i, s| {
         str::parse::<T>(&*s).with_context(|| format!("Parse error on line {}", i + 1))
+    })
+}
+
+pub fn parse_input_as_value_list_anyhow<R, T>(input: R) -> impl Iterator<Item = anyhow::Result<T>>
+    where
+        R: std::io::BufRead,
+        T: FromStr,
+        <T as FromStr>::Err: AsRef<dyn std::error::Error + Send + Sync + 'static>,
+{
+    transform_input_as_value_list(input, |i, s| {
+        str::parse::<T>(&*s)
+            .map_err(|e| anyhow!("Parse error on line {}: {}", i + 1, e.as_ref()))
     })
 }
 
